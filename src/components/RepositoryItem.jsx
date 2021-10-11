@@ -10,6 +10,7 @@ const RepositoryItem = ( { item } ) => (
         Forks: {item.forksCount} {'\n'}
         Reviews: {item.reviewCount} {'\n'}
         Rating: {item.ratingAverage}
+        Something else
     </Text>
 );
 
