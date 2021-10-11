@@ -11,7 +11,7 @@ export default function App() {
   );
 }
 
-console.log('Testi')
+console.log('Testi');
 
 const styles = StyleSheet.create({
   container: {
