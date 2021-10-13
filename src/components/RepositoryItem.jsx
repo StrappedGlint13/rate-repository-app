@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     color: theme.colors.white,
     backgroundColor: theme.colors.language_back,
     alignSelf: 'flex-start',
-    marginHorizontal: "16%",
+    marginHorizontal: "20%",
     fontSize: theme.fontSizes.body,
   },
   description: {
@@ -58,8 +58,8 @@ const RepositoryItem = ( { item } ) => {
       <View style={styles.flex_nextto}>
         <View style={styles.flexContainer} paddingVertical={2} >
           <View style={styles.flexContainer}
-          paddingHorizontal={5}>
-            <Image 
+          paddingHorizontal={15}>
+            <Image
               style={theme.tinyLogo}
               source={{ uri: `${item.ownerAvatarUrl}`}}>
             </Image>
