@@ -1,12 +1,14 @@
 const theme = {
     colors: {
       textPrimary: '#24292e',
-      textSecondary: 'white',
-      primary: '#0366d6',
+      white: 'white',
+      main: '#e1e4e8',
+      language_back: '#0366d6',
+      grey: 'darkslategrey'
     },
     fontSizes: {
       appbar: 20,
-      body: 14,
+      body: 15,
       subheading: 16,
     },
     fonts: {
@@ -17,9 +19,24 @@ const theme = {
       bold: '700',
     },
     appbar: {
-      paddingVertical: 100,
+      paddingVertical: 50,
       fontSizes: 20,
-    }
+      marginHorizontal: "10%",
+      white: 'white',
+    },
+    tinyLogo: {
+        width: 50,
+        height: 50,
+    },
+    box: {
+        width: 100,
+        height: 145,
+    },
+    stretch: {
+        width: 50,
+        height: 200,
+        resizeMode: 'stretch',
+    },
   };
   
   export default theme;
