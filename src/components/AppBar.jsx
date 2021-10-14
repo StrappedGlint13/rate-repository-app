@@ -1,29 +1,35 @@
 import React from 'react';
-import { View, StyleSheet, Pressable, Text } from 'react-native';
+import { View, StyleSheet, Pressable, Text, ScrollView } from 'react-native';
 import theme from './../theme';
 
 import { Link } from "react-router-native";
 
 const styles = StyleSheet.create({
-  appbar: {
-    fontSize: theme.appbar.fontSizes,
-    paddingVertical: theme.appbar.paddingVertical,
-    marginHorizontal: theme.appbar.marginHorizontal,
-    color: theme.appbar.white,
-    fontWeight: theme.fontWeights.bold,
-  },
-  boxstyle: {
-    flexDirection: "row",
-    flex: 1,
+  container: {
+    height: 100,
     backgroundColor: theme.colors.textPrimary,
-    width: "auto",
+    flexDirection: "row",
+    flexGrow: 1,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    
+  },
+  textStyle: {
+    color: theme.appbar.white,
+    fontSize: theme.appbar.fontSize,
+    fontWeight: theme.fontWeights.bold,
+    marginHorizontal: 12,
+  },
+  scrollStyle: {
+    
+    flexGrow: 0,
   }
 });
 
  const AppBarTab = ({ tab, onPress }) => {
   return (
     <Pressable onPress={onPress}> 
-        <Text style={styles.appbar} >
+        <Text style={styles.textStyle} >
               {tab} 
         </Text>
       </Pressable>
@@ -36,13 +42,30 @@ const AppBar = () => {
   };
 
   return (
-    <View style={styles.boxstyle}>
-    <Link to="/" component={AppBarTab}
-    tab={'Repositories'} onPress={handlePress}>
-      </Link>
-    <Link to="/signin" component={AppBarTab}
-    tab={'Sign in'} onPress={handlePress}>
-      </Link>
+    <View style={styles.container}>
+      <ScrollView horizontal contentContainerStyle={styles.scrollStyle}>
+        <Link to="/" component={AppBarTab}
+          tab={'Repositories '} onPress={handlePress}>
+        </Link>
+        <Link to="/signin" component={AppBarTab}
+          tab={'Sign in '} onPress={handlePress}>
+        </Link>
+        <Link to="/" component={AppBarTab}
+          tab={'Repositories '} onPress={handlePress}>
+        </Link>
+        <Link to="/" component={AppBarTab}
+          tab={'Repositories'} onPress={handlePress}>
+        </Link>
+        <Link to="/" component={AppBarTab}
+          tab={'Repositories'} onPress={handlePress}>
+        </Link>
+        <Link to="/" component={AppBarTab}
+          tab={'Repositories'} onPress={handlePress}>
+        </Link>
+        <Link to="/" component={AppBarTab}
+          tab={'Repositories'} onPress={handlePress}>
+        </Link>
+      </ScrollView>
     </View>
   );
   

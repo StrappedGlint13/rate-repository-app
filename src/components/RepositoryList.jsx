@@ -6,12 +6,6 @@ const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 });
 
 const repositories = [

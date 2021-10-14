@@ -20,7 +20,7 @@ const theme = {
     },
     appbar: {
       paddingVertical: 50,
-      fontSizes: 20,
+      fontSize: 20,
       marginHorizontal: "10%",
       white: 'white',
     },

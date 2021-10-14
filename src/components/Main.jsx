@@ -25,11 +25,8 @@ const Main = () => {
 //<Redirect to="/" />    
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#e1e4e8',
     justifyContent: 'center',
-    flexGrow: 1,
-    flexShrink: 1,
   },
 });
 
