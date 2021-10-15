@@ -50,21 +50,6 @@ const AppBar = () => {
         <Link to="/signin" component={AppBarTab}
           tab={'Sign in '} onPress={handlePress}>
         </Link>
-        <Link to="/" component={AppBarTab}
-          tab={'Repositories '} onPress={handlePress}>
-        </Link>
-        <Link to="/" component={AppBarTab}
-          tab={'Repositories'} onPress={handlePress}>
-        </Link>
-        <Link to="/" component={AppBarTab}
-          tab={'Repositories'} onPress={handlePress}>
-        </Link>
-        <Link to="/" component={AppBarTab}
-          tab={'Repositories'} onPress={handlePress}>
-        </Link>
-        <Link to="/" component={AppBarTab}
-          tab={'Repositories'} onPress={handlePress}>
-        </Link>
       </ScrollView>
     </View>
   );
