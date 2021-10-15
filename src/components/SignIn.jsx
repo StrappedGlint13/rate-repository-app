@@ -2,6 +2,7 @@ import React from 'react';
 import FormikTextInput from './FormikTextInput';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
+import * as yup from 'yup';
 
 import Text from './Text';
 
@@ -45,14 +46,26 @@ const initialValues = {
   password: '',
 };
 
+const validationSchema = yup.object().shape({
+  username: yup
+    .string()
+    .required('Username is required'),
+  password: yup
+    .string()
+    .required('Password is required'),
+});
+
 const onSubmit = (values) => {
   console.log(values);
 };
 
 const SignIn = () => {
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+    <Formik initialValues={initialValues} 
+    onSubmit={onSubmit}
+    validationSchema={validationSchema}>
+      {({ handleSubmit }) => 
+      <SignInForm onSubmit={handleSubmit} />}
     </Formik>
   );
 };
