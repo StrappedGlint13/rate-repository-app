@@ -11,9 +11,6 @@ const theme = {
       body: 15,
       subheading: 16,
     },
-    fonts: {
-      main: 'System',
-    },
     fontWeights: {
       normal: '400',
       bold: '700',
