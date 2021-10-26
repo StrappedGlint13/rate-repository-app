@@ -3,6 +3,10 @@ import { View, StyleSheet, Pressable, Text, ScrollView } from 'react-native';
 import theme from './../theme';
 
 import { Link } from "react-router-native";
+import { useQuery, useApolloClient } from '@apollo/client';
+import { AUTHORIZED_USER } from '../graphql/queries';
+
+import useAuthStorage from '../hooks/useAuthStorage';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,23 +36,41 @@ const styles = StyleSheet.create({
         <Text style={styles.textStyle} >
               {tab} 
         </Text>
-      </Pressable>
+    </Pressable>
   );
 };
 
 const AppBar = () => {
-  const handlePress = () => {
-    console.log('test');
+  const { data } = useQuery(AUTHORIZED_USER);
+  console.log(data);
+  const authStorage = useAuthStorage();
+  const client = useApolloClient(); 
+  
+  const signOut = () => {
+    authStorage.removeAccessToken();
+    client.resetStore();
   };
+
+  if (!data.authorizedUser) {
+    return (
+      <View style={styles.container}>
+        <ScrollView horizontal contentContainerStyle={styles.scrollStyle}>
+          <Link to="/signin" component={AppBarTab}
+            tab={'Welcome! Sign in below :)'}>
+          </Link>
+        </ScrollView>
+      </View>);
+  }
 
   return (
     <View style={styles.container}>
+      {console.log(data)}
       <ScrollView horizontal contentContainerStyle={styles.scrollStyle}>
         <Link to="/" component={AppBarTab}
-          tab={'Repositories '} onPress={handlePress}>
+          tab={'Repositories '}>
         </Link>
         <Link to="/signin" component={AppBarTab}
-          tab={'Sign in '} onPress={handlePress}>
+          tab={'Sign out '} onPress={signOut}>
         </Link>
       </ScrollView>
     </View>

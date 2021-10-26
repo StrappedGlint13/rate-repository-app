@@ -6,6 +6,9 @@ import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
 
 import Text from './Text';
+import { useApolloClient } from '@apollo/client';
+
+import useAuthStorage from '../hooks/useAuthStorage';
 
 const styles = StyleSheet.create({
   container: {
@@ -57,13 +60,16 @@ const validationSchema = yup.object().shape({
 });
 
 const SignIn = () => {
+  const authStorage = useAuthStorage();
   const [signIn] = useSignIn();
+  const client = useApolloClient();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
     try {
       const {data} = await signIn({ username, password });
-      console.log(data);
+      await authStorage.setAccessToken(data.authorize.accessToken);
+      client.resetStore();
     } catch (e) {
       console.log(e);
     }
