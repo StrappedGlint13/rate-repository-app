@@ -16,7 +16,7 @@ const Main = () => {
             <Route path="/">          
               <RepositoryList />        
             </Route>  
-            <Redirect to="/" />
+            <Redirect to="/signin" />
         </Switch>
     </View> 
   );

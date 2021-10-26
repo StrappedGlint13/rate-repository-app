@@ -65,12 +65,11 @@ const RepositoryItem = ( { item } ) => {
             </Image>
           </View>
           <View style={styles.flex_nextto}>
-              <Text style={styles.name}> {item.fullName} </Text>
-              <Text style={styles.description} > {item.description} </Text>
+              <Text testID="name" style={styles.name}> {item.fullName} </Text>
+              <Text testID="description" style={styles.description} > {item.description} </Text>
           </View>
       </View>
-      <Text style={styles.language}> 
-      {item.language} </Text>
+      <Text testID="language" style={styles.language}> {item.language} </Text>
       <Bottom stargazersCount={item.stargazersCount} 
       forksCount={item.forksCount} reviewCount={item.reviewCount} 
       ratingAverage={item.ratingAverage} />
@@ -87,20 +86,20 @@ const Bottom = ( {
   return (
     <View style={styles.bottomContainer}>
       <View style={styles.flexBottoms}  >
-        <Text style={styles.bottomNumbers}> {kFormatter(stargazersCount)}</Text>
+        <Text testID="stargazersCount" style={styles.bottomNumbers}> {kFormatter(stargazersCount)}</Text>
         <Text style={styles.bottomText}> Stars </Text>
       </View>
       <View style={styles.flexBottoms} >
-        <Text style={styles.bottomNumbers}> {kFormatter(forksCount)}</Text>
+        <Text testID="forksCount" style={styles.bottomNumbers}> {kFormatter(forksCount)}</Text>
         <Text style={styles.bottomText}> Forks </Text>
       </View>
       <View style={styles.flexBottoms} >
-        <Text style={styles.bottomNumbers}
+        <Text testID="reviewCount" style={styles.bottomNumbers}
         > {kFormatter(reviewCount)}</Text>
         <Text style={styles.bottomText}> Reviews </Text>
       </View>
       <View style={styles.flexBottoms} >
-        <Text style={styles.bottomNumbers}> {ratingAverage}</Text>
+        <Text testID="ratingAverage" style={styles.bottomNumbers}> {ratingAverage}</Text>
         <Text style={styles.bottomText}> Rating </Text>
       </View>
     </View>

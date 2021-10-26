@@ -41,8 +41,7 @@ const styles = StyleSheet.create({
 };
 
 const AppBar = () => {
-  const { data } = useQuery(AUTHORIZED_USER);
-  console.log(data);
+  const result  = useQuery(AUTHORIZED_USER);
   const authStorage = useAuthStorage();
   const client = useApolloClient(); 
   
@@ -51,7 +50,11 @@ const AppBar = () => {
     client.resetStore();
   };
 
-  if (!data.authorizedUser) {
+  if (result.loading) {
+    return <Text>loading...</Text>;
+  }
+
+  if (!result.data.authorizedUser) {
     return (
       <View style={styles.container}>
         <ScrollView horizontal contentContainerStyle={styles.scrollStyle}>
@@ -61,10 +64,10 @@ const AppBar = () => {
         </ScrollView>
       </View>);
   }
+  
 
   return (
     <View style={styles.container}>
-      {console.log(data)}
       <ScrollView horizontal contentContainerStyle={styles.scrollStyle}>
         <Link to="/" component={AppBarTab}
           tab={'Repositories '}>

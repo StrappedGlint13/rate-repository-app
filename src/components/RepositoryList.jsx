@@ -19,7 +19,12 @@ const renderItem = ({ item }) => (
 const RepositoryList = () => {
   const { repositories } = useRepositories();
 
-  const repositoryNodes = repositories
+  return <RepositoryListContainer repositories={repositories} />;
+ 
+};
+
+export const RepositoryListContainer = ({ repositories }) => {
+    const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
   return (
