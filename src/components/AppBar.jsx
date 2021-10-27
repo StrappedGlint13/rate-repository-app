@@ -54,27 +54,17 @@ const AppBar = () => {
     return <Text>loading...</Text>;
   }
 
-  if (!result.data.authorizedUser) {
-    return (
-      <View style={styles.container}>
-        <ScrollView horizontal contentContainerStyle={styles.scrollStyle}>
-          <Link to="/signin" component={AppBarTab}
-            tab={'Welcome! Sign in below :)'}>
-          </Link>
-        </ScrollView>
-      </View>);
-  }
-  
-
   return (
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollStyle}>
         <Link to="/" component={AppBarTab}
           tab={'Repositories '}>
         </Link>
-        <Link to="/signin" component={AppBarTab}
+        {!result.data.authorizedUser ? <Link to="/signin" component={AppBarTab}
+            tab={'Sign in'}>
+          </Link> : <Link to="/signin" component={AppBarTab}
           tab={'Sign out '} onPress={signOut}>
-        </Link>
+        </Link>}
       </ScrollView>
     </View>
   );

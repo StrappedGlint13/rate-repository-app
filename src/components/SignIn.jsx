@@ -9,6 +9,7 @@ import Text from './Text';
 import { useApolloClient } from '@apollo/client';
 
 import useAuthStorage from '../hooks/useAuthStorage';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,11 +19,11 @@ const styles = StyleSheet.create({
     height: 200,
   },
   button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    backgroundColor: 'green',
+    alignItems: theme.button.alignItems,
+    justifyContent: theme.button.justifyContent,
+    paddingVertical: theme.button.paddingVertical,
+    paddingHorizontal: theme.button.paddingHorizontal,
+    backgroundColor: theme.button.backgroundColor,
   },
   text: {
     fontSize: 18,

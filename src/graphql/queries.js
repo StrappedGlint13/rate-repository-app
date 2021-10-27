@@ -37,5 +37,20 @@ export const LOGIN = gql`
       accessToken
     }
   }
-  
+`;
+
+export const GITHUB_ACCESS = gql`
+  query repository($id: ID!) {
+    repository(id: $id) {
+      fullName,
+      ratingAverage,
+      forksCount,
+      reviewCount,
+      stargazersCount,
+      description,
+      language
+      url
+      ownerAvatarUrl
+    }
+  }
 `;

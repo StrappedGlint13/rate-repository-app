@@ -34,6 +34,13 @@ const theme = {
         height: 200,
         resizeMode: 'stretch',
     },
+    button: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 12,
+      paddingHorizontal: 25,
+      backgroundColor: 'green',
+    },
   };
   
   export default theme;

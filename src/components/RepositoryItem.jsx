@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Pressable } from 'react-native';
 import Text from './Text';
 import theme from './../theme';
+import { useHistory } from "react-router-native";
+import * as Linking from 'expo-linking';
+
 
 const styles = StyleSheet.create({
   flexContainer: {
@@ -49,32 +52,65 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizes.body,
     color: theme.colors.textPrimary,
     fontWeight: theme.fontWeights.bold
-  }
+  },
+  button: {
+    alignItems: theme.button.alignItems,
+    justifyContent: theme.button.justifyContent,
+    paddingVertical: theme.button.paddingVertical,
+    paddingHorizontal: theme.button.paddingHorizontal,
+    backgroundColor: theme.button.backgroundColor,
+  },
 });
+
 const kFormatter = num => Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num);
 
-const RepositoryItem = ( { item } ) => {
-    return (
-      <View style={styles.flex_nextto}>
-        <View style={styles.flexContainer} paddingVertical={2} >
-          <View style={styles.flexContainer}
-          paddingHorizontal={15}>
-            <Image
-              style={theme.tinyLogo}
-              source={{ uri: `${item.ownerAvatarUrl}`}}>
-            </Image>
-          </View>
-          <View style={styles.flex_nextto}>
-              <Text testID="name" style={styles.name}> {item.fullName} </Text>
+const RepositoryItem = ( { item, singleView } ) => {
+  let history = useHistory();
+  
+  const pressHandler = () =>  {   
+    history.push(`/${item.id}`);
+  };
+
+  const onSubmit = async ( url ) => {
+    try {
+      await Linking.openURL(url);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+      <View>
+      <Pressable onPress={pressHandler} >
+        <View>
+          <View style={styles.flexContainer} paddingVertical={2} >
+            <View style={styles.flexContainer}
+            paddingHorizontal={15}>
+              <Image
+                style={theme.tinyLogo}
+                source={{ uri: `${item.ownerAvatarUrl}`}}
+                on>
+              </Image>
+            </View>
+            <View style={styles.flex_nextto}>
+              <Text testID="name" style={styles.name}> {item.fullName} 
+              </Text>
               <Text testID="description" style={styles.description} > {item.description} </Text>
-          </View>
+            </View>
+        </View>
+        <View backgroundColor={theme.colors.white}>
+        <Text testID="language" style={styles.language}> {item.language} </Text>
+        </View>
+        <Bottom stargazersCount={item.stargazersCount} 
+        forksCount={item.forksCount} reviewCount={item.reviewCount} 
+        ratingAverage={item.ratingAverage} />
+        </View>
+      </Pressable>
+      {singleView ?  <Pressable onPress={() => onSubmit(item.url)} style={styles.button}>
+          <Text color={'main'} fontWeight={'bold'}> Open in Github</Text>
+      </Pressable> : null}
       </View>
-      <Text testID="language" style={styles.language}> {item.language} </Text>
-      <Bottom stargazersCount={item.stargazersCount} 
-      forksCount={item.forksCount} reviewCount={item.reviewCount} 
-      ratingAverage={item.ratingAverage} />
-      </View>
-    );
+  );
 };
 
 const Bottom = ( { 
