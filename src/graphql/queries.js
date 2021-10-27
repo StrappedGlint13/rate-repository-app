@@ -39,7 +39,7 @@ export const LOGIN = gql`
   }
 `;
 
-export const GITHUB_ACCESS = gql`
+export const REPOSITORY = gql`
   query repository($id: ID!) {
     repository(id: $id) {
       fullName,
@@ -51,6 +51,20 @@ export const GITHUB_ACCESS = gql`
       language
       url
       ownerAvatarUrl
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
     }
   }
 `;

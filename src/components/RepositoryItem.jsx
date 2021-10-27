@@ -7,16 +7,6 @@ import * as Linking from 'expo-linking';
 
 
 const styles = StyleSheet.create({
-  flexContainer: {
-    flexDirection: 'row',
-    backgroundColor: theme.colors.white,
-  },
-  flex_nextto: {
-    flexDirection: 'column',
-    backgroundColor: theme.colors.white,
-    paddingVertical: 2,
-    flex: 1,
-  },
   flexBottoms: {
     flexDirection: 'column',
     backgroundColor: theme.colors.white,
@@ -83,8 +73,8 @@ const RepositoryItem = ( { item, singleView } ) => {
       <View>
       <Pressable onPress={pressHandler} >
         <View>
-          <View style={styles.flexContainer} paddingVertical={2} >
-            <View style={styles.flexContainer}
+          <View style={theme.flexContainer} paddingVertical={2} >
+            <View style={theme.flexContainer}
             paddingHorizontal={15}>
               <Image
                 style={theme.tinyLogo}
@@ -92,7 +82,7 @@ const RepositoryItem = ( { item, singleView } ) => {
                 on>
               </Image>
             </View>
-            <View style={styles.flex_nextto}>
+            <View style={theme.flex_nextto}>
               <Text testID="name" style={styles.name}> {item.fullName} 
               </Text>
               <Text testID="description" style={styles.description} > {item.description} </Text>

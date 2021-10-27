@@ -40,6 +40,17 @@ const theme = {
       paddingVertical: 12,
       paddingHorizontal: 25,
       backgroundColor: 'green',
+      marginVertical: 10,
+    },
+    flexContainer: {
+      flexDirection: 'row',
+      backgroundColor: 'white',
+    },
+    flex_nextto: {
+      flexDirection: 'column',
+      backgroundColor: 'white',
+      paddingVertical: 2,
+      flex: 1,
     },
   };
   
