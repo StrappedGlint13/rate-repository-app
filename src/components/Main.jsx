@@ -1,11 +1,11 @@
 import React from 'react';
 import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
-// import SingleRepository from './RepositoryItem';
 import { View, StyleSheet } from 'react-native';
 import { Route, Switch, Redirect } from 'react-router-native';
 import SignIn from './SignIn';
 import  SingleRepository  from './SingleRepository';
+import CreateReview from './CreateReview';
 
 const Main = () => {
   return (
@@ -14,13 +14,16 @@ const Main = () => {
         <Switch>   
             <Route path="/signin" exact>          
               <SignIn />        
-            </Route>     
-            <Route path="/:id" exact>          
-              <SingleRepository />        
+            </Route>
+            <Route path="/review" exact>          
+              <CreateReview />        
             </Route> 
-            <Route path="/">          
+            <Route path="/:id">          
+              <SingleRepository />        
+            </Route>
+            <Route path="/" exact>          
               <RepositoryList />        
-            </Route>   
+            </Route>        
             <Redirect to="/" />
         </Switch>
     </View> 

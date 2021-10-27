@@ -39,7 +39,7 @@ const theme = {
       justifyContent: 'center',
       paddingVertical: 12,
       paddingHorizontal: 25,
-      backgroundColor: 'green',
+      backgroundColor: '#0366d6',
       marginVertical: 10,
     },
     flexContainer: {

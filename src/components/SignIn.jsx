@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     justifyContent: 'space-between',
     height: 200,
+    backgroundColor: 'white',
   },
   button: {
     alignItems: theme.button.alignItems,

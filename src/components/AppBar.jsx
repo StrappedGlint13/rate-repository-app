@@ -60,6 +60,9 @@ const AppBar = () => {
         <Link to="/" component={AppBarTab}
           tab={'Repositories '}>
         </Link>
+        <Link to="/review" component={AppBarTab}
+          tab={'Create a review '}>
+        </Link>
         {!result.data.authorizedUser ? <Link to="/signin" component={AppBarTab}
             tab={'Sign in'}>
           </Link> : <Link to="/signin" component={AppBarTab}

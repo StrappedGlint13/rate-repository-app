@@ -29,7 +29,8 @@ export const RepositoryListContainer = ({ repositories }) => {
     : [];
   return (
     <FlatList
-      data={repositoryNodes}
+    inverted  
+    data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderItem}
       keyExtractor={item => item.id}
