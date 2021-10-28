@@ -6,6 +6,7 @@ import { Route, Switch, Redirect } from 'react-router-native';
 import SignIn from './SignIn';
 import  SingleRepository  from './SingleRepository';
 import CreateReview from './CreateReview';
+import SignUp from './SignUp';
 
 const Main = () => {
   return (
@@ -14,6 +15,9 @@ const Main = () => {
         <Switch>   
             <Route path="/signin" exact>          
               <SignIn />        
+            </Route>
+            <Route path="/signup" exact>          
+              <SignUp />        
             </Route>
             <Route path="/review" exact>          
               <CreateReview />        

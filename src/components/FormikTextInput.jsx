@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
   textInput: {
     paddingHorizontal: 10,
     paddingVertical: 10,
-  }
+    marginVertical: 10,
+  },
 });
 
 const FormikTextInput = ({ name, ...props }) => {

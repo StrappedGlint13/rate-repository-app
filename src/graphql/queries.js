@@ -18,6 +18,16 @@ export const GET_REPOSITORIES = gql`
   }
 `;
 
+export const SIGNUP = gql`
+  mutation createUser($username: String!, $password: String!) {
+    createUser(user: {
+      username: $username,
+      password: $password,
+    }) {
+      username
+    }
+  }
+`;
 
 export const AUTHORIZED_USER = gql`
   query {

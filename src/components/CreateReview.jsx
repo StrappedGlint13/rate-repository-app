@@ -31,18 +31,15 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'white',
   },
-  textinput: {
-      marginVertical: 10,
-  }
 });
 
 const CreateReviewForm = ( { onSubmit } ) => {
   return (
     <View style={styles.container}>
-      <FormikTextInput style={styles.textinput} name="ownerName" placeholder="Repository owner name"/>
-      <FormikTextInput style={styles.textinput} name="repositoryName" placeholder="Repository name"/>
-      <FormikTextInput style={styles.textinput} name="rating" placeholder="Rating between 0 and 100"/>
-      <FormikTextInput style={styles.textinput} name="text" placeholder="Review" multiline={true} />
+      <FormikTextInput name="ownerName" placeholder="Repository owner name"/>
+      <FormikTextInput name="repositoryName" placeholder="Repository name"/>
+      <FormikTextInput name="rating" placeholder="Rating between 0 and 100"/>
+      <FormikTextInput name="text" placeholder="Review" multiline={true} />
       <Pressable onPress={onSubmit} style={styles.button}>
           <Text color={'main'} fontWeight={'bold'}>Create a review</Text>
       </Pressable>
@@ -66,7 +63,7 @@ const validationSchema = yup.object().shape({
     .string()
     .required('Repository name is required'),
   rating: yup
-    .number()
+    .string()
     .required('Rating is required')
     .min(0)
     .max(100)
