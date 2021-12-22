@@ -1,13 +1,21 @@
 import React from "react";
 import { View, Picker, StyleSheet } from "react-native";
+import { Searchbar } from 'react-native-paper';
 
-const FilterMenu = ({ selectedValue, setSelectedValue }) => {
+const FilterMenu = ({ selectedValue, setSelectedValue, searchKeyword, setSearchkeyword }) => {
+  
   return (
     <View style={styles.container}>
+        <Searchbar
+          style={{ margin: 5 }}
+          placeholder="Search repo"
+          onChangeText={(query) => setSearchkeyword(query)}
+          value={searchKeyword}
+        />
       <Picker
-        selectedValue={selectedValue}
+        selectedValue={selectedValue} 
         style={{ height: 50, width: 185 }}
-        onValueChange={(itemValue) => setSelectedValue(itemValue)}
+        onValueChange={(itemValue)  => setSelectedValue(itemValue)}
       >
         <Picker.Item label="Select an item..."/>
         <Picker.Item label="Latest repository" value="Latest" />

@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_REPOSITORIES } from '../graphql/queries';
 import Text from '../components/Text';
 
-const useRepositories = ( { selectedValue } ) => {
+const useRepositories = ( { selectedValue, debouncedKeyword, setSearchkeyword } ) => {
   let value = {};
+  
+  useEffect(()=> {
+    setSearchkeyword(debouncedKeyword);
+  }, [debouncedKeyword]);
 
   switch (selectedValue) {
     case "Latest":
-      value = {orderBy: "CREATED_AT", orderDirection: "DESC"};
+      value = {orderBy: "CREATED_AT", orderDirection: "DESC", searchKeyword: `${debouncedKeyword}` };
       break;
     case "Highest":
-      value = {orderBy: "RATING_AVERAGE", orderDirection: "DESC"};
+      value = {orderBy: "RATING_AVERAGE", orderDirection: "DESC", searchKeyword: `${debouncedKeyword}`};
       break;
     case "Lowest":
-      value = {orderBy: "RATING_AVERAGE", orderDirection: "ASC"};
+      value = {orderBy: "RATING_AVERAGE", orderDirection: "ASC", searchKeyword: `${debouncedKeyword}`};
       break;
     default:
-      value = {orderBy: "CREATED_AT", orderDirection: "ASC"};
+      value = {orderBy: "CREATED_AT", orderDirection: "ASC",searchKeyword: `${debouncedKeyword}`};
       break;
 
   }

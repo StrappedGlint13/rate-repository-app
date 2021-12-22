@@ -3,6 +3,7 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 import FilterMenu from './FilterMenu';
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
@@ -18,18 +19,18 @@ const renderItem = ({ item }) => (
   );
 
 const RepositoryList = () => {
-
   const [selectedValue, setSelectedValue] = useState(null);
-  const {repositories } = useRepositories({selectedValue});
+  const [searchKeyword, setSearchkeyword] = useState("");
+  const [debouncedKeyword] = useDebounce(searchKeyword, 500);
+  const {repositories } = useRepositories({selectedValue, debouncedKeyword, setSearchkeyword});
 
   
   return <RepositoryListContainer selectedValue={selectedValue} 
-  setSelectedValue={ setSelectedValue} repositories={repositories} />;
+  setSelectedValue={ setSelectedValue} repositories={repositories} searchKeyword={searchKeyword}  setSearchkeyword={setSearchkeyword} />;
  
 };
 
-export const RepositoryListContainer = ({repositories, selectedValue, setSelectedValue}) => {
-  console.log('con');
+export const RepositoryListContainer = ({repositories, selectedValue, setSelectedValue, searchKeyword, setSearchkeyword}) => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
@@ -40,8 +41,8 @@ export const RepositoryListContainer = ({repositories, selectedValue, setSelecte
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderItem}
       keyExtractor={item => item.id}
-      ListHeaderComponent={() => <FilterMenu selectedValue={selectedValue} 
-      setSelectedValue={setSelectedValue}/>}
+      ListHeaderComponent={<FilterMenu selectedValue={selectedValue} searchKeyword={searchKeyword} 
+      setSelectedValue={setSelectedValue} setSearchkeyword={setSearchkeyword}/>}
     />
   );
 };
