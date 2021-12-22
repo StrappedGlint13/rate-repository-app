@@ -22,15 +22,18 @@ const RepositoryList = () => {
   const [selectedValue, setSelectedValue] = useState(null);
   const [searchKeyword, setSearchkeyword] = useState("");
   const [debouncedKeyword] = useDebounce(searchKeyword, 500);
-  const {repositories } = useRepositories({selectedValue, debouncedKeyword, setSearchkeyword});
+  const { repositories } = useRepositories({selectedValue, debouncedKeyword, setSearchkeyword});
 
+  const onEndReach = () => {
+    console.log('You have reached the end of the list');
+  };
   
   return <RepositoryListContainer selectedValue={selectedValue} 
-  setSelectedValue={ setSelectedValue} repositories={repositories} searchKeyword={searchKeyword}  setSearchkeyword={setSearchkeyword} />;
+  setSelectedValue={ setSelectedValue} onEndReach={onEndReach} repositories={repositories} searchKeyword={searchKeyword}  setSearchkeyword={setSearchkeyword} />;
  
 };
 
-export const RepositoryListContainer = ({repositories, selectedValue, setSelectedValue, searchKeyword, setSearchkeyword}) => {
+export const RepositoryListContainer = ({repositories, onEndReach, selectedValue, setSelectedValue, searchKeyword, setSearchkeyword}) => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
@@ -43,6 +46,8 @@ export const RepositoryListContainer = ({repositories, selectedValue, setSelecte
       keyExtractor={item => item.id}
       ListHeaderComponent={<FilterMenu selectedValue={selectedValue} searchKeyword={searchKeyword} 
       setSelectedValue={setSelectedValue} setSearchkeyword={setSearchkeyword}/>}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };

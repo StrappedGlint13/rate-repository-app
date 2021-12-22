@@ -89,22 +89,51 @@ const ReviewItem = ({ review }) => {
 const SingleRepository = () => {
     const { id }= useParams();
 
-    const result = useQuery(REPOSITORY, {
+    const { data, loading, fetchMore } = useQuery(REPOSITORY, {
       fetchPolicy: 'cache-and-network',
-      variables: { id: id}
+      variables: { first: 4, id: id }
     });
-    console.log('loading...');
-    if (result.loading || result === undefined) {
-      return <Text>loading...</Text>;
-    }
-    
-    const repository = result.data.repository;
 
+    const handleFetchMore = () => {
+      const canFetchMore = !loading && data && data.repository.reviews.pageInfo.hasNextPage;
+  
+      if (!canFetchMore) {
+        console.log("RETURN", canFetchMore);
+        return;
+      }
+      console.log("HMM", canFetchMore);
+      fetchMore({
+        query: REPOSITORY,
+        variables: {
+          after: data.repository.reviews.pageInfo.endCursor,
+          variables: { first: 4, id: id },
+        },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          const nextResult = {
+            repository: {
+              ...fetchMoreResult.repository,
+                edges: [
+                  ...previousResult.repository.reviews.edges,
+                  ...fetchMoreResult.repository.reviews.edges,
+                ],
+              },
+            };
+          return nextResult;
+        },
+      });
+    };
+    
+    const repository = data ? data.repository : undefined;
+    console.log(repository);
     if (!repository) {
       return null;
     }
 
     const reviews = repository.reviews.edges.map((e) => e.node);
+
+    const onEndReach = () => {
+      handleFetchMore();
+    };
 
     return (
       <FlatList
@@ -113,6 +142,8 @@ const SingleRepository = () => {
         keyExtractor={({ id }) => id}
         ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
         ItemSeparatorComponent={ItemSeparator}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
       />
     );
   };

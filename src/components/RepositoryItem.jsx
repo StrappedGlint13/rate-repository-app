@@ -68,7 +68,7 @@ const RepositoryItem = ( { item, singleView } ) => {
       console.log(e);
     }
   };
-
+  
   return (
       <View>
       <Pressable onPress={pressHandler} >

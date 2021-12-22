@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_REPOSITORIES = gql`
-  query repositories($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection, $searchKeyword: String) {
-    repositories(orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
+  query repositories($first: Int, $after: String, $orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection, $searchKeyword: String) {
+    repositories(first: $first, after: $after, orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
         edges {
           node {
             createdAt
@@ -63,7 +63,7 @@ export const CREATE_REVIEW = gql`
 `;
 
 export const REPOSITORY = gql`
-  query repository($id: ID!) {
+  query repository($id: ID!, $first: Int, $after: String) {
     repository(id: $id) {
       fullName,
       ratingAverage,
@@ -74,7 +74,7 @@ export const REPOSITORY = gql`
       language
       url
       ownerAvatarUrl
-      reviews {
+      reviews(first: $first, after: $after) {
         edges {
           node {
             id
@@ -86,6 +86,12 @@ export const REPOSITORY = gql`
               username
             }
           }
+          cursor
+        }
+        pageInfo {
+          endCursor
+          startCursor
+          hasNextPage
         }
       }
     }
